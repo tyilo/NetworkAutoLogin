@@ -1,3 +1,6 @@
+NetworkAutoLogin/resources/phantomjs
+NetworkAutoLogin/resources/casperjs
+
 # Xcode
 .DS_Store
 */build/*
@@ -19,3 +22,4 @@ DerivedData
 
 #CocoaPods
 Pods
+
