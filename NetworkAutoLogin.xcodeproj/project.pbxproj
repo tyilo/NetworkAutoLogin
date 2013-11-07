@@ -1,0 +1,337 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		55D30C361705F1D70045719C /* Install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 55D30C371705F1D70045719C /* Build configuration list for PBXAggregateTarget "Install" */;
+			buildPhases = (
+				55D30C3A1705F1DC0045719C /* ShellScript */,
+			);
+			dependencies = (
+				55D30C3C1705F1DE0045719C /* PBXTargetDependency */,
+			);
+			name = Install;
+			productName = Install;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		55A2883A15CC6F3D00EF55FB /* NSData+BSSID.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2883915CC6F3D00EF55FB /* NSData+BSSID.m */; };
+		55A4746C15BA25AF00F12DA5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A4746B15BA25AF00F12DA5 /* Foundation.framework */; };
+		55A4746F15BA25AF00F12DA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A4746E15BA25AF00F12DA5 /* main.m */; };
+		55A4747A15BA288800F12DA5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A4747915BA288800F12DA5 /* SystemConfiguration.framework */; };
+		55A474E615BA386D00F12DA5 /* resources in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55A474E515BA386800F12DA5 /* resources */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55D30C3B1705F1DE0045719C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A4745E15BA25AD00F12DA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55A4746615BA25AE00F12DA5;
+			remoteInfo = NetworkAutoLogin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		55A474CE15BA384E00F12DA5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				55A474E615BA386D00F12DA5 /* resources in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		55A2883815CC6F3D00EF55FB /* NSData+BSSID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+BSSID.h"; sourceTree = "<group>"; };
+		55A2883915CC6F3D00EF55FB /* NSData+BSSID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+BSSID.m"; sourceTree = "<group>"; };
+		55A4746715BA25AE00F12DA5 /* NetworkAutoLogin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NetworkAutoLogin; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A4746B15BA25AF00F12DA5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		55A4746E15BA25AF00F12DA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		55A4747115BA25AF00F12DA5 /* NetworkAutoLogin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NetworkAutoLogin-Prefix.pch"; sourceTree = "<group>"; };
+		55A4747915BA288800F12DA5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		55A474E515BA386800F12DA5 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
+		55D9572615CCB43B0047CE96 /* com.tyilo.networkautologin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.tyilo.networkautologin.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55A4746415BA25AE00F12DA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A4746C15BA25AF00F12DA5 /* Foundation.framework in Frameworks */,
+				55A4747A15BA288800F12DA5 /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55A4745C15BA25AD00F12DA5 = {
+			isa = PBXGroup;
+			children = (
+				55A4746D15BA25AF00F12DA5 /* NetworkAutoLogin */,
+				55A4746A15BA25AF00F12DA5 /* Frameworks */,
+				55A4746815BA25AE00F12DA5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		55A4746815BA25AE00F12DA5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55A4746715BA25AE00F12DA5 /* NetworkAutoLogin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55A4746A15BA25AF00F12DA5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55A4747915BA288800F12DA5 /* SystemConfiguration.framework */,
+				55A4746B15BA25AF00F12DA5 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55A4746D15BA25AF00F12DA5 /* NetworkAutoLogin */ = {
+			isa = PBXGroup;
+			children = (
+				55A4746E15BA25AF00F12DA5 /* main.m */,
+				55D9572615CCB43B0047CE96 /* com.tyilo.networkautologin.plist */,
+				55A2883815CC6F3D00EF55FB /* NSData+BSSID.h */,
+				55A2883915CC6F3D00EF55FB /* NSData+BSSID.m */,
+				55A474E515BA386800F12DA5 /* resources */,
+				55A4747015BA25AF00F12DA5 /* Supporting Files */,
+			);
+			path = NetworkAutoLogin;
+			sourceTree = "<group>";
+		};
+		55A4747015BA25AF00F12DA5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55A4747115BA25AF00F12DA5 /* NetworkAutoLogin-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55A4746615BA25AE00F12DA5 /* NetworkAutoLogin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55A4747615BA25AF00F12DA5 /* Build configuration list for PBXNativeTarget "NetworkAutoLogin" */;
+			buildPhases = (
+				55A4746315BA25AE00F12DA5 /* Sources */,
+				55A4746415BA25AE00F12DA5 /* Frameworks */,
+				55A474CE15BA384E00F12DA5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkAutoLogin;
+			productName = NetworkAutoLogin;
+			productReference = 55A4746715BA25AE00F12DA5 /* NetworkAutoLogin */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55A4745E15BA25AD00F12DA5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Asger Drewsen";
+			};
+			buildConfigurationList = 55A4746115BA25AD00F12DA5 /* Build configuration list for PBXProject "NetworkAutoLogin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 55A4745C15BA25AD00F12DA5;
+			productRefGroup = 55A4746815BA25AE00F12DA5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55A4746615BA25AE00F12DA5 /* NetworkAutoLogin */,
+				55D30C361705F1D70045719C /* Install */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55D30C3A1705F1DC0045719C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_dir=\"$HOME/Library/Application Support/NetworkAutoLogin\"\nrm -rf \"$install_dir\"\ncp -r \"$BUILT_PRODUCTS_DIR/\" \"$install_dir\"\n\nplist=\"com.tyilo.networkautologin.plist\"\ndaemon_path=\"$HOME/Library/LaunchAgents/$plist\"\ncp \"$PROJECT_DIR/$PROJECT_NAME/$plist\" \"$daemon_path\"\n\nlaunchctl unload \"$daemon_path\"\nlaunchctl load \"$daemon_path\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55A4746315BA25AE00F12DA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A4746F15BA25AF00F12DA5 /* main.m in Sources */,
+				55A2883A15CC6F3D00EF55FB /* NSData+BSSID.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55D30C3C1705F1DE0045719C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55A4746615BA25AE00F12DA5 /* NetworkAutoLogin */;
+			targetProxy = 55D30C3B1705F1DE0045719C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		55A4747415BA25AF00F12DA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		55A4747515BA25AF00F12DA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		55A4747715BA25AF00F12DA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NetworkAutoLogin/NetworkAutoLogin-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55A4747815BA25AF00F12DA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NetworkAutoLogin/NetworkAutoLogin-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		55D30C381705F1D70045719C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55D30C391705F1D70045719C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55A4746115BA25AD00F12DA5 /* Build configuration list for PBXProject "NetworkAutoLogin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A4747415BA25AF00F12DA5 /* Debug */,
+				55A4747515BA25AF00F12DA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55A4747615BA25AF00F12DA5 /* Build configuration list for PBXNativeTarget "NetworkAutoLogin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A4747715BA25AF00F12DA5 /* Debug */,
+				55A4747815BA25AF00F12DA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55D30C371705F1D70045719C /* Build configuration list for PBXAggregateTarget "Install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55D30C381705F1D70045719C /* Debug */,
+				55D30C391705F1D70045719C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 55A4745E15BA25AD00F12DA5 /* Project object */;
+}
