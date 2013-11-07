@@ -10,8 +10,7 @@ exports.forms = [
 		form_selector: 'form#login_form',
 		fields: {
 			'username': '',
-			'password': '',
-			'remember_me': 'yes'
+			'password': ''
 		}
 	},
 	*/
