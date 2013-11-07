@@ -1,6 +1,8 @@
 NetworkAutoLogin
 ================
 
+Automagically logs into to Captive Portal Networks
+
 Installation
 ------------
 
