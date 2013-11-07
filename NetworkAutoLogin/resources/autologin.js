@@ -8,10 +8,10 @@ var casper = require('casper').create();
 var casper2 = require('casper').create();
 casper2.start('about:blank');
 
-//const FORMS = require('./config').forms;
-var FORMS = require(casper.cli.args[0]).forms;
-var SSID = casper.cli.args[1];
-var BSSID = casper.cli.args[2];
+var args = casper.cli.args;
+var FORMS = require(args[0]).forms;
+var SSID = args[1];
+var BSSID = args[2];
 
 function timeout() {
 	casper.echo('Failed to find login form, timed out.');
