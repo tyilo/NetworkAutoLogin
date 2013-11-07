@@ -1,5 +1,6 @@
 NetworkAutoLogin/resources/phantomjs
-NetworkAutoLogin/resources/casperjs
+NetworkAutoLogin/resources/casperjs/*
+!NetworkAutoLogin/resources/casperjs/.empty_dir
 
 # Xcode
 .DS_Store
