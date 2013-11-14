@@ -29,19 +29,28 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 	
 	if(powerStatus == AIRPORT_CONNECTED) {
 		if(BSSID && !([BSSID isEqualToString:oldBSSID])) {
-			printf("Running script...\n");
-			
-			// Force quit or else it will disconnect from the network
-			system("(while ! killall -9 'Captive Network Assistant' &> /dev/null; do sleep 0.5; done) & echo $! > $TMPDIR/killscript_pid");
-			
-			int result = system([[NSString stringWithFormat:@"PATH=resources:$PATH resources/casperjs/bin/casperjs resources/autologin.js '%@' '%@' '%@'", CONFIG_PATH, SSID, BSSID, nil] UTF8String]);
+			int result;
+			for(int tries = 0; tries < 20; tries++) {
+				NSLog(@"Running script...");
+				
+				// Force quit or else it will disconnect from the network
+				system("(while ! killall -9 'Captive Network Assistant' &> /dev/null; do sleep 0.5; done) & echo $! > $TMPDIR/killscript_pid");
+				
+				result = system([[NSString stringWithFormat:@"PATH=resources:$PATH resources/casperjs/bin/casperjs resources/autologin.js '%@' '%@' '%@' 2>/dev/null", CONFIG_PATH, SSID, BSSID, nil] UTF8String]) % 255;
+				
+				if(result != 99) {
+					break;
+				}
+				
+				sleep(1);
+			}
 			
 			cleanUp();
 			
 			if(result != EXIT_SUCCESS) {
 				system("open -a 'Captive Network Assistant' &");
 			}
-			printf("Done.\n");
+			NSLog(@"Done.");
 		}
 		
 		oldBSSID = BSSID;
@@ -112,7 +121,7 @@ int main(int argc, const char * argv[])
 		
 		if(![[NSFileManager defaultManager] fileExistsAtPath:CONFIG_PATH]) {
 			[[NSFileManager defaultManager] copyItemAtPath:EXAMPLE_CONFIG_PATH toPath:CONFIG_PATH error:nil];
-			printf("~/.networkautologin.js doesn't exist, creating...\n");
+			NSLog(@"~/.networkautologin.js doesn't exist, creating...");
 		}
 		
 		SCDynamicStoreRef dynStore = setupInterfaceWatch();

@@ -183,7 +183,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "install_dir=\"$HOME/Library/Application Support/NetworkAutoLogin\"\nrm -rf \"$install_dir\"\ncp -r \"$BUILT_PRODUCTS_DIR/\" \"$install_dir\"\n\nplist=\"com.tyilo.networkautologin.plist\"\ndaemon_path=\"$HOME/Library/LaunchAgents/$plist\"\ncp \"$PROJECT_DIR/$PROJECT_NAME/$plist\" \"$daemon_path\"\n\nlaunchctl unload \"$daemon_path\"\nlaunchctl load \"$daemon_path\"";
+			shellScript = "if [ ! -f \"$BUILT_PRODUCTS_DIR/resources/casperjs/bin/casperjs\" ]; then\n    echo \"casperjs not found in resources/casperjs/bin/casperjs\"\n    exit 1\nfi\nif [ ! -f \"$BUILT_PRODUCTS_DIR/resources/phantomjs\" ]; then\n    echo \"phantomjs not found in resources/phantomjs\"\n    exit 1\nfi\n\ninstall_dir=\"$HOME/Library/Application Support/NetworkAutoLogin\"\nrm -rf \"$install_dir\"\ncp -r \"$BUILT_PRODUCTS_DIR/\" \"$install_dir\"\n\nplist=\"com.tyilo.networkautologin.plist\"\ndaemon_path=\"$HOME/Library/LaunchAgents/$plist\"\nplist_content=\"$(<\"$PROJECT_DIR/$PROJECT_NAME/$plist\")\"\necho \"${plist_content//@HOME@/$HOME}\" > \"$daemon_path\"\n\nlaunchctl unload \"$daemon_path\"\nlaunchctl load \"$daemon_path\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

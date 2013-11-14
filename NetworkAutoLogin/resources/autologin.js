@@ -47,7 +47,7 @@ casper.start(TEST_URL, function() {
 
 	if(URL === 'about:blank') {
 		casper.echo('Redirected to about:blank, are you connected to the network?');
-		casper.exit(1);
+		casper.exit(99);
 	}
 
 	var form;

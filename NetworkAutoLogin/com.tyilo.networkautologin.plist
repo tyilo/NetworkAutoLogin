@@ -8,11 +8,11 @@
 	<true/>
 	<key>OnDemand</key>
 	<false/>
-	<key>ProgramArguments</key>
-	<array>
-		<string>sh</string>
-		<string>-c</string>
-		<string>&quot;$HOME/Library/Application Support/NetworkAutoLogin/NetworkAutoLogin&quot;</string>
-	</array>
+	<key>StandardErrorPath</key>
+	<string>@HOME@/Library/Logs/NetworkAutoLogin.log</string>
+	<key>StandardOutPath</key>
+	<string>@HOME@/Library/Logs/NetworkAutoLogin.log</string>
+	<key>Program</key>
+	<string>@HOME@/Library/Application Support/NetworkAutoLogin/NetworkAutoLogin</string>
 </dict>
 </plist>
