@@ -67,7 +67,8 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 			}
 			
 			if(result != EXIT_SUCCESS) {
-				system("open -a 'Captive Network Assistant' &");
+				// This fucks up everything, don't:
+				//system("open -a 'Captive Network Assistant' &");
 			}
 			NSLog(@"Done.");
 		}
