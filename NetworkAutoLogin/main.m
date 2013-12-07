@@ -10,7 +10,9 @@
 #define AIRPORT_KEY @"State:/Network/Interface/en1/AirPort"
 #define IP_KEY @"State:/Network/Global/IPv4"
 #define CONFIG_PATH [NSHomeDirectory() stringByAppendingPathComponent:@".networkautologin.js"]
-#define EXAMPLE_CONFIG_PATH @"./resources/config.js"
+#define EXAMPLE_CONFIG_PATH @"resources/config.js"
+#define CASPERJS_BIN_PATH @"resources/casperjs/bin/casperjs"
+#define PHANTOMJS_BIN_PATH @"resources/phantomjs"
 #define PATH_ENV [[NSProcessInfo processInfo] environment][@"PATH"]
 
 #define NOT_CONNECTED_ERROR 99
@@ -42,7 +44,7 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				
 				NSTask *task = [[NSTask alloc] init];
 				task.environment = @{@"PATH": [@"resources:" stringByAppendingString:PATH_ENV]};
-				task.launchPath = @"resources/casperjs/bin/casperjs";
+				task.launchPath = CASPERJS_BIN_PATH;
 				task.arguments = @[@"resources/autologin.js", CONFIG_PATH, SSID, BSSID];
 				
 				[task launch];
@@ -126,11 +128,23 @@ static SCDynamicStoreRef setupInterfaceWatch(void) {
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		chdir([[[NSBundle mainBundle] bundlePath] UTF8String]);
+		NSFileManager *fileManager = [NSFileManager defaultManager];
 		
-		if(![[NSFileManager defaultManager] fileExistsAtPath:CONFIG_PATH]) {
-			[[NSFileManager defaultManager] copyItemAtPath:EXAMPLE_CONFIG_PATH toPath:CONFIG_PATH error:nil];
+		[fileManager changeCurrentDirectoryPath:[[NSBundle mainBundle] bundlePath]];
+		
+		if(![fileManager fileExistsAtPath:CONFIG_PATH]) {
+			[fileManager copyItemAtPath:EXAMPLE_CONFIG_PATH toPath:CONFIG_PATH error:nil];
 			NSLog(@"~/.networkautologin.js doesn't exist, creating...");
+		}
+		
+		if(![fileManager fileExistsAtPath:CASPERJS_BIN_PATH]) {
+			NSLog(@"casperjs binary not found at '%@/%@'!", [fileManager currentDirectoryPath], CASPERJS_BIN_PATH);
+			return EXIT_FAILURE;
+		}
+		
+		if(![fileManager fileExistsAtPath:CASPERJS_BIN_PATH]) {
+			NSLog(@"phantomjs binary not found at '%@/%@'!", [fileManager currentDirectoryPath], CASPERJS_BIN_PATH);
+			return EXIT_FAILURE;
 		}
 		
 		SCDynamicStoreRef dynStore = setupInterfaceWatch();
