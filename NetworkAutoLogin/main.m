@@ -15,7 +15,11 @@
 #define PHANTOMJS_BIN_PATH @"resources/phantomjs"
 #define PATH_ENV [[NSProcessInfo processInfo] environment][@"PATH"]
 
-#define NOT_CONNECTED_ERROR 99
+#define EXIT_LOGGED_IN         1
+#define EXIT_ALREADY_LOGGED_IN 2
+#define EXIT_TIMEOUT           3
+#define EXIT_NO_MATCH          4
+#define EXIT_NOT_CONNECTED     5
 
 NSString *oldBSSID;
 
@@ -59,18 +63,30 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				
 				result = [task terminationStatus];
 				
-				if(result != NOT_CONNECTED_ERROR) {
+				if(result != EXIT_TIMEOUT && result != EXIT_NOT_CONNECTED) {
 					break;
 				}
 				
 				sleep(1);
 			}
 			
-			if(result != EXIT_SUCCESS) {
-				// This fucks up everything, don't:
-				//system("open -a 'Captive Network Assistant' &");
+			switch(result) {
+				case EXIT_LOGGED_IN:
+					NSLog(@"Successfully logged in.");
+					break;
+				case EXIT_ALREADY_LOGGED_IN:
+					NSLog(@"Already logged in.");
+					break;
+				case EXIT_NO_MATCH:
+					NSLog(@"No credentials found for current SSID/BSSID.");
+					break;
+				case EXIT_TIMEOUT:
+					NSLog(@"Timed out while trying to login.");
+					break;
+				case EXIT_NOT_CONNECTED:
+					NSLog(@"Could not connect to the network.");
+					break;
 			}
-			NSLog(@"Done.");
 		}
 		
 		oldBSSID = BSSID;

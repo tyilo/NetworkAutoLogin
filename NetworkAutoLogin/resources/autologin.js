@@ -1,9 +1,11 @@
-const SUCCESS = 0;
-const ERROR = 1;
-const NOT_CONNECTED_ERROR = 99;
+const EXIT_LOGGED_IN         = 1;
+const EXIT_ALREADY_LOGGED_IN = 2;
+const EXIT_TIMEOUT           = 3;
+const EXIT_NO_MATCH          = 4;
+const EXIT_NOT_CONNECTED     = 5;
 
 const SELECTOR_TIMEOUT = 20 * 1000;
-const LOGIN_TIMEOUT = 10 * 1000;
+const LOGIN_TIMEOUT    = 10 * 1000;
 
 const TEST_URL = 'http://www.apple.com/library/test/success.html';
 const EXPECTED_RESULT = 'Success';
@@ -19,7 +21,7 @@ var BSSID = args[2];
 
 function timeout() {
 	casper.echo('Failed to find login form, timed out.');
-	casper.exit(ERROR);
+	casper.exit(TIMEOUT_ERROR);
 }
 
 function connected(casper) {
@@ -34,7 +36,7 @@ function checkConnection() {
 	casper2.thenOpen(TEST_URL, function() {
 		if(connected(casper2)) {
 			casper.echo('Successfully logged in.');
-			casper.exit(SUCCESS);
+			casper.exit(EXIT_LOGGED_IN);
 		} else {
 			setTimeout(checkConnection, 500);
 		}
@@ -44,14 +46,14 @@ function checkConnection() {
 casper.start(TEST_URL, function() {
 	if(connected(casper)) {
 		casper.echo('Already logged in.');
-		casper.exit(SUCCESS);
+		casper.exit(EXIT_ALREADY_LOGGED_IN);
 	}
 
 	var URL = casper.getCurrentUrl();
 
 	if(URL === 'about:blank') {
 		casper.echo('Redirected to about:blank, are you connected to the network?');
-		casper.exit(NOT_CONNECTED_ERROR);
+		casper.exit(EXIT_NOT_CONNECTED);
 	}
 
 	var form;
@@ -101,7 +103,7 @@ casper.start(TEST_URL, function() {
 		casper.echo('SSID = ' + SSID);
 		casper.echo('BSSID = ' + BSSID);
 		casper.echo('URL = ' + URL);
-		casper.exit(ERROR);
+		casper.exit(EXIT_NO_MATCH);
 	}
 
 	var form_selector = form['form_selector'] || 'form';
@@ -127,7 +129,7 @@ casper.start(TEST_URL, function() {
 		casper.then(function() {
 			casper.wait(LOGIN_TIMEOUT, function() { // Timeout for trying to check connection
 				casper.echo('Failed to login, timed out.');
-				casper.exit(ERROR);
+				casper.exit(EXIT_TIMEOUT);
 			});
 
 			casper2.run(); // Stops casper2 from quitting the whole script before it is needed
