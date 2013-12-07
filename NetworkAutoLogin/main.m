@@ -11,6 +11,7 @@
 #define IP_KEY @"State:/Network/Global/IPv4"
 #define CONFIG_PATH [NSHomeDirectory() stringByAppendingPathComponent:@".networkautologin.js"]
 #define EXAMPLE_CONFIG_PATH @"./resources/config.js"
+#define PATH_ENV [[NSProcessInfo processInfo] environment][@"PATH"]
 
 #define NOT_CONNECTED_ERROR 99
 
@@ -40,7 +41,7 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				NSLog(@"Running script...");
 				
 				NSTask *task = [[NSTask alloc] init];
-				task.environment = @{@"PATH": [@"resources:" stringByAppendingString:[[NSProcessInfo processInfo] environment][@"PATH"]]};
+				task.environment = @{@"PATH": [@"resources:" stringByAppendingString:PATH_ENV]};
 				task.launchPath = @"resources/casperjs/bin/casperjs";
 				task.arguments = @[@"resources/autologin.js", CONFIG_PATH, SSID, BSSID];
 				
