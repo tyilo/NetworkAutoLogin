@@ -24,10 +24,10 @@ static void cleanUp()
 static void checkUpdate(SCDynamicStoreRef dynStore) {
 	NSDictionary *airportStatus = (__bridge NSDictionary *)SCDynamicStoreCopyValue(dynStore, (__bridge CFStringRef)AIRPORT_KEY);
 	
-	NSString *SSID = [airportStatus objectForKey:@"SSID_STR"];
-	NSString *BSSID = [[airportStatus objectForKey:@"BSSID"] BSSIDString];
+	NSString *SSID = airportStatus[@"SSID_STR"];
+	NSString *BSSID = [airportStatus[@"BSSID"] BSSIDString];
 	
-	int powerStatus = [[airportStatus objectForKey:@"Power Status"] intValue];
+	int powerStatus = [airportStatus[@"Power Status"] intValue];
 	
 	if(powerStatus == AIRPORT_CONNECTED) {
 		if(BSSID && !([BSSID isEqualToString:oldBSSID])) {
