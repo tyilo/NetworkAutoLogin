@@ -51,6 +51,9 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				task.launchPath = CASPERJS_BIN_PATH;
 				task.arguments = @[@"resources/autologin.js", CONFIG_PATH, SSID, BSSID];
 				
+				// This is used to get rid of 'CoreText performance note:' error messages from phantomjs
+				task.standardError = [NSFileHandle fileHandleWithNullDevice];
+				
 				[task launch];
 				
 				while([task isRunning]) {
