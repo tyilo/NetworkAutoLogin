@@ -1,3 +1,7 @@
+const SUCCESS = 0;
+const ERROR = 1;
+const NOT_CONNECTED_ERROR = 99;
+
 const SELECTOR_TIMEOUT = 20 * 1000;
 const LOGIN_TIMEOUT = 10 * 1000;
 
@@ -15,7 +19,7 @@ var BSSID = args[2];
 
 function timeout() {
 	casper.echo('Failed to find login form, timed out.');
-	casper.exit(1);
+	casper.exit(ERROR);
 }
 
 function connected(casper) {
@@ -30,7 +34,7 @@ function checkConnection() {
 	casper2.thenOpen(TEST_URL, function() {
 		if(connected(casper2)) {
 			casper.echo('Successfully logged in.');
-			casper.exit(0);
+			casper.exit(SUCCESS);
 		} else {
 			setTimeout(checkConnection, 500);
 		}
@@ -40,14 +44,14 @@ function checkConnection() {
 casper.start(TEST_URL, function() {
 	if(connected(casper)) {
 		casper.echo('Already logged in.');
-		casper.exit(0);
+		casper.exit(SUCCESS);
 	}
 
 	var URL = casper.getCurrentUrl();
 
 	if(URL === 'about:blank') {
 		casper.echo('Redirected to about:blank, are you connected to the network?');
-		casper.exit(99);
+		casper.exit(NOT_CONNECTED_ERROR);
 	}
 
 	var form;
@@ -97,7 +101,7 @@ casper.start(TEST_URL, function() {
 		casper.echo('SSID = ' + SSID);
 		casper.echo('BSSID = ' + BSSID);
 		casper.echo('URL = ' + URL);
-		casper.exit(1);
+		casper.exit(ERROR);
 	}
 
 	var form_selector = form['form_selector'] || 'form';
@@ -123,7 +127,7 @@ casper.start(TEST_URL, function() {
 		casper.then(function() {
 			casper.wait(LOGIN_TIMEOUT, function() { // Timeout for trying to check connection
 				casper.echo('Failed to login, timed out.');
-				casper.exit(1);
+				casper.exit(ERROR);
 			});
 
 			casper2.run(); // Stops casper2 from quitting the whole script before it is needed

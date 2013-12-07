@@ -12,6 +12,8 @@
 #define CONFIG_PATH [NSHomeDirectory() stringByAppendingPathComponent:@".networkautologin.js"]
 #define EXAMPLE_CONFIG_PATH @"./resources/config.js"
 
+#define NOT_CONNECTED_ERROR 99
+
 NSString *oldBSSID;
 
 static void cleanUp()
@@ -38,7 +40,7 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				
 				result = system([[NSString stringWithFormat:@"PATH=resources:$PATH resources/casperjs/bin/casperjs resources/autologin.js '%@' '%@' '%@' 2>/dev/null", CONFIG_PATH, SSID, BSSID, nil] UTF8String]) % 255;
 				
-				if(result != 99) {
+				if(result != NOT_CONNECTED_ERROR) {
 					break;
 				}
 				
