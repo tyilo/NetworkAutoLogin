@@ -50,7 +50,10 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				[task launch];
 				
 				while([task isRunning]) {
-					system("killall -9 'Captive Network Assistant' &> /dev/null");
+					// While CNA is running, only it will have access to the network
+					// and all other requests will fail.
+					// Simple solution: KILL IT!
+					system("killall 'Captive Network Assistant' &> /dev/null");
 					usleep(250 * 1000);
 				}
 				
