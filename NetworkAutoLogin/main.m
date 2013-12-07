@@ -16,13 +16,12 @@
 
 NSString *oldBSSID;
 
-static void cleanUp()
-{
-	system("xargs kill < $TMPDIR/killscript_pid &> /dev/null");
+static NSDictionary *getAirportStatus(SCDynamicStoreRef dynStore) {
+	return (__bridge NSDictionary *)SCDynamicStoreCopyValue(dynStore, (__bridge CFStringRef)AIRPORT_KEY);
 }
 
 static void checkUpdate(SCDynamicStoreRef dynStore) {
-	NSDictionary *airportStatus = (__bridge NSDictionary *)SCDynamicStoreCopyValue(dynStore, (__bridge CFStringRef)AIRPORT_KEY);
+	NSDictionary *airportStatus = getAirportStatus(dynStore);
 	
 	NSString *SSID = airportStatus[@"SSID_STR"];
 	NSString *BSSID = [airportStatus[@"BSSID"] BSSIDString];
@@ -33,12 +32,26 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 		if(BSSID && !([BSSID isEqualToString:oldBSSID])) {
 			int result;
 			for(int tries = 0; tries < 20; tries++) {
+				powerStatus = [getAirportStatus(dynStore)[@"Power Status"] intValue];
+				if(powerStatus != AIRPORT_CONNECTED) {
+					break;
+				}
+				
 				NSLog(@"Running script...");
 				
-				// Force quit or else it will disconnect from the network
-				system("(while ! killall -9 'Captive Network Assistant' &> /dev/null; do sleep 0.5; done) & echo $! > $TMPDIR/killscript_pid");
+				NSTask *task = [[NSTask alloc] init];
+				task.environment = @{@"PATH": [@"resources:" stringByAppendingString:[[NSProcessInfo processInfo] environment][@"PATH"]]};
+				task.launchPath = @"resources/casperjs/bin/casperjs";
+				task.arguments = @[@"resources/autologin.js", CONFIG_PATH, SSID, BSSID];
 				
-				result = system([[NSString stringWithFormat:@"PATH=resources:$PATH resources/casperjs/bin/casperjs resources/autologin.js '%@' '%@' '%@' 2>/dev/null", CONFIG_PATH, SSID, BSSID, nil] UTF8String]) % 255;
+				[task launch];
+				
+				while([task isRunning]) {
+					system("killall -9 'Captive Network Assistant' &> /dev/null");
+					usleep(250 * 1000);
+				}
+				
+				result = [task terminationStatus];
 				
 				if(result != NOT_CONNECTED_ERROR) {
 					break;
@@ -46,8 +59,6 @@ static void checkUpdate(SCDynamicStoreRef dynStore) {
 				
 				sleep(1);
 			}
-			
-			cleanUp();
 			
 			if(result != EXIT_SUCCESS) {
 				system("open -a 'Captive Network Assistant' &");
@@ -70,7 +81,7 @@ static void callback(SCDynamicStoreRef dynStore, CFArrayRef changedKeys, void *i
 	}
 }
 
-SCDynamicStoreRef setupInterfaceWatch(void) {
+static SCDynamicStoreRef setupInterfaceWatch(void) {
 	SCDynamicStoreContext context = {0, NULL, NULL, NULL, NULL};
 	
 	SCDynamicStoreRef dynStore = SCDynamicStoreCreate(kCFAllocatorDefault,
@@ -112,13 +123,8 @@ SCDynamicStoreRef setupInterfaceWatch(void) {
 	return dynStore;
 }
 
-int main(int argc, const char * argv[])
-{
-	
+int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		signal(SIGINT, cleanUp);
-		signal(SIGTERM, cleanUp);
-	    
 		chdir([[[NSBundle mainBundle] bundlePath] UTF8String]);
 		
 		if(![[NSFileManager defaultManager] fileExistsAtPath:CONFIG_PATH]) {
@@ -136,5 +142,6 @@ int main(int argc, const char * argv[])
 		CFRunLoopRun();
 	    
 	}
-    return EXIT_SUCCESS;
+	
+	return EXIT_SUCCESS;
 }
